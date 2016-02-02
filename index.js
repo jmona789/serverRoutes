@@ -19,7 +19,7 @@ var handleRequest = function (req, res) {
     case '/favoritefoods':
       display_favfood(req, res);
       break;
-    case '/favoritecssframworks':
+    case '/favoritecssframeworks':
       display_favcss(req, res);
       break;
     default:
@@ -30,20 +30,50 @@ var handleRequest = function (req, res) {
 }
 
 var display_root = function(req, res) {
-  console.log("hit");
   fs.readFile("home.html", "utf8", function(err, data){
     if (err){
       console.log(err);
     }
     else{
       var myHTML = data;
-      console.log(myHTML)
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end(myHTML);
     }
   })
 }
 
+var display_favfood = function(req, res) {
+  fs.readFile("favfoods.html", "utf8", function(err, data){
+    if (err){
+      console.log(err);
+    }
+    else{
+      var myHTML = data;
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end(myHTML);
+    }
+  })
+}
+
+
+var display_favcss = function(req, res) {
+  fs.readFile("favcss.html", "utf8", function(err, data){
+    if (err){
+      console.log(err);
+    }
+    else{
+      var myHTML = data;
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end(myHTML);
+    }
+  })
+}
+
+var display_404 = function(req, res) {
+  res.writeHead(404, {'Content-Type': 'text/html'});
+  res.write("<h1>Not found</h1>");
+  res.end("This is not the page you are looking for");
+}
 
 var server = http.createServer(handleRequest);
 
